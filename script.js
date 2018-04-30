@@ -1,8 +1,24 @@
 function pal18() {
-  var dieciocho = new Date(2017, 08, 18);
-  var ahora = Date.now();
+  var ahora = new Date();
+
+  var anho = ahora.getFullYear();
+  var mes = ahora.getMonth();
+  var dia = ahora.getDate();
+
+  if (mes < 8) {
+    var dieciocho = new Date(anho, 8, 18);
+  } else if (mes > 8) {
+    var dieciocho = new Date(anho + 1, 8, 18);
+  } else {
+    if (dia < 18) {
+      var dieciocho = new Date(anho, 8, 18);
+    } else if (dia >= 18) {
+      var dieciocho = new Date(anho + 1, 8, 18);
+    }
+  }
 
   var diferencia = dieciocho - ahora;
+  console.log("diferencia " + diferencia);  
 
   var d = diferencia /1000 /60 /60 /24;
   var dias = Math.floor(d);
@@ -14,7 +30,7 @@ function pal18() {
   var minutos = Math.floor(m);
 
   var s = (m - minutos) *60;
-  var segundos = Math.floor(s);
+  var segundos = parseFloat(s).toFixed(3);
 
   document.getElementById("dias").innerHTML = dias;
   document.getElementById("horas").innerHTML = horas;
@@ -23,5 +39,5 @@ function pal18() {
 }
 
 function iniciar() {
-  setInterval(pal18, 1000)
+  setInterval(pal18, 1)
 }
